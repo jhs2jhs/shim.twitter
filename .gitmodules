@@ -1,3 +1,6 @@
 [submodule "tweepy"]
 	path = tweepy
 	url = https://github.com/tweepy/tweepy.git
+[submodule "test_submodule"]
+	path = test_submodule
+	url = https://jianhuashao@github.com/jianhuashao/test_submodule.git
