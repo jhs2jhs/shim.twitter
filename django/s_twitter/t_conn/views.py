@@ -10,25 +10,29 @@ import oauth2 as oauth
 import myutil
 import cgi
 from t_conn.models import Profile
-
+import urllib #only use it to encode http url paramater, not use it for http connection
 
 consumer = oauth.Consumer(settings.TWITTER_CONSUMER_TOKEN, settings.TWITTER_CONSUMER_SECRET)
 client = oauth.Client(consumer)
 #print settings.twitter_request_token_url
+oauth_callback = urllib.urlencode({'oauth_callback':'http://localhost:8080/login/authenticated/'})
 
 def twitter_login(request):
     #step 1: get a request token from twitter
-    resp, content = client.request(settings.TWITTER_REQUEST_TOKEN_URL, 'GET')
+    resp, content = client.request(settings.TWITTER_REQUEST_TOKEN_URL, 'POST', body=oauth_callback)
+    #resp, content = client.request(settings.TWITTER_REQUEST_TOKEN_URL, 'GET')
     if resp['status'] != '200':
+        print content
         raise Exception('Invalid response from Twitter')
 
     #step 2: store the request token in a session for later use
     request.session['request_token'] = dict(cgi.parse_qsl(content))
     print request.session['request_token']
+    print resp
 
     #step 3: redirect the user to the authenticate URL. 
     #url = '%s?oauth_token=%s'%(settings.TWITTER_AUTHENTICATE_URL, request.session['request_token']['oauth_token'])
-    url = '%s?oauth_token=%s'%(settings.TWITTER_AUTHORIZE_URL, request.session['request_token']['oauth_token'])
+    url = '%s?oauth_token=%s&%s'%(settings.TWITTER_AUTHORIZE_URL, request.session['request_token']['oauth_token'], oauth_callback)
     print url
 
     return HttpResponseRedirect(url)
@@ -39,6 +43,7 @@ def twitter_logout(request):
 
 def twitter_authenticated(request):
     #step 1: use the request token in the session to build a new client. 
+    print request
     token = oauth.Token(request.session['request_token']['oauth_token'], request.session['request_token']['oauth_token_secret'])
     client = oauth.Client(consumer, token)
     
