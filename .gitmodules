@@ -4,3 +4,6 @@
 [submodule "test_submodule"]
 	path = test_submodule
 	url = https://jianhuashao@github.com/jianhuashao/test_submodule.git
+[submodule "python-oauth2"]
+	path = python-oauth2
+	url = https://github.com/simplegeo/python-oauth2.git
