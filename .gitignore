@@ -26,6 +26,8 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-*.sq*
+*.sql*
 
 *#*
+
+django/s_twitter/s_twitter.sql
