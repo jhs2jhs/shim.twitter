@@ -144,3 +144,7 @@ LOGGING = {
         },
     }
 }
+
+# setting path of tweepy here
+import sys
+sys.path.append('../../tweepy')

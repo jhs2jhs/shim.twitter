@@ -19,4 +19,5 @@ urlpatterns = patterns('',
 
     #url(r'^t_conn/hello', 'hello', include('s_twitter.t_conn.views')),
     url(r'^t_conn/hello', 't_conn.views.hello'),
+    url(r'^t_conn/test_tweepy', 't_conn.views.test_tweepy')
 )
