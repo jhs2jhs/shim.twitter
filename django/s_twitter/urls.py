@@ -18,7 +18,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     #url(r'^t_conn/hello', 'hello', include('s_twitter.t_conn.views')),
-    url(r'^t_conn/hello', 't_conn.views.hello'),
+    url(r'^t_conn/hello', 't_conn.test.hello'),
     url(r'^t_conn/test_oauth', 't_conn.test.test_oauth2'),
     url(r'^t_conn/test_tweepy', 't_conn.test.test_tweepy'),
+    url(r'^login/?$', 't_conn.views.twitter_login'),
+    url(r'^logout/?$', 't_conn.views.twitter_logout'),
+    url(r'^login/authenticated/?$', 't_conn.views.twitter_authenticated'),
 )

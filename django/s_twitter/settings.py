@@ -148,3 +148,12 @@ LOGGING = {
 # setting path of tweepy here
 import sys
 sys.path.append('../../tweepy')
+
+# settings for twitter
+TWITTER_CONSUMER_TOKEN = 'xoxygrgP3ocua3xnsHHPyA'
+TWITTER_CONSUMER_SECRET = 'pHZeJqvBodFVUzlfi24l0ujf22ksdjxiqVmKyT5H7ls'
+
+TWITTER_REQUEST_TOKEN_URL = 'http://twitter.com/oauth/request_token'
+TWITTER_ACCESS_TOKEN_URL = 'http://twitter.com/oauth/access_token'
+TWITTER_AUTHORIZE_URL = 'http://twitter.com/oauth/authorize'
+TWITTER_AUTHENTICATE_URL = 'http://twitter.com/oauth/authenticate'
