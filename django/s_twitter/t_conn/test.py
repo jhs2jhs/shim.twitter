@@ -1,4 +1,3 @@
-# Create your views here.
 from django.shortcuts import HttpResponse
 import json
 
@@ -41,8 +40,3 @@ def test_oauth2(request):
     resp, content = client.request(user_timeline_url, 'GET')
     print content
     return HttpResponse(content)
-        
-def convert_timeline_json(timeline):
-    j = []
-    for tl in timeline:
-        entitie = tl.entities
