@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 )
 
 ROOT_URLCONF = 's_twitter.urls'
@@ -106,6 +107,16 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '../template'
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.csrf",
 )
 
 INSTALLED_APPS = (
@@ -157,4 +168,4 @@ TWITTER_CONSUMER_SECRET = 'pHZeJqvBodFVUzlfi24l0ujf22ksdjxiqVmKyT5H7ls'
 TWITTER_REQUEST_TOKEN_URL = 'https://api.twitter.com/oauth/request_token'
 TWITTER_ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token'
 TWITTER_AUTHORIZE_URL = 'http://api.twitter.com/oauth/authorize'
-TWITTER_AUTHENTICATE_URL = 'http://twitter.com/oauth/authenticate'
+TWITTER_AUTHENTICATE_URL = 'http://api.twitter.com/oauth/authenticate'

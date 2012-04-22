@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Consumer(models.Model):
+    token = models.CharField(max_length=200)
+    secret = models.CharField(max_length=200)
+    add_time = models.DateField(auto_now_add=False)
+
 class Profile(models.Model):
     user = models.ForeignKey(User)
     oauth_token = models.CharField(max_length=200)
