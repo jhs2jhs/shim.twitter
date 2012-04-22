@@ -4,23 +4,19 @@ from django.contrib.auth.models import User
 class Consumer(models.Model):
     token = models.CharField(max_length=200)
     secret = models.CharField(max_length=200)
-    add_time = models.DateField(auto_now_add=False)
+    add_time = models.DateTimeField(auto_now_add=True)
+    def __unicode__(self):
+        return unicode(self.add_time)+" : "+self.token
 
 class Profile(models.Model):
-    user = models.ForeignKey(User)
-    oauth_token = models.CharField(max_length=200)
-    oauth_secret = models.CharField(max_length=200)
+    user = models.ForeignKey(User, null=False)
+    consumer = models.ForeignKey(Consumer, null=False)
+    oauth_user_id = models.CharField(max_length=20, null=True)
+    oauth_screen_name = models.CharField(max_length=200, null=True)
+    oauth_token = models.CharField(max_length=200, null=True)
+    oauth_secret = models.CharField(max_length=200, null=True)
+    add_time = models.DateTimeField(auto_now_add=True)
+    modify_time = models.DateTimeField(auto_now=True)
     def __unicode__(self):
-        return self.user.user.username
+        return self.oauth_screen_name+" : "+unicode(self.modify_time)
 
-# Create your models here.
-class Client_Twitter(models.Model):
-    #user = models.OneToOneField('Client') 
-    twitter_id = models.DecimalField(max_digits=20, decimal_places=0, null=True)
-    access_token = models.CharField(max_length=200, null=True)
-    access_token_secret = models.CharField(max_length=200, null=True)
-    twitter_username = models.CharField(max_length=200, null=True)
-    # how to link the twitter account to user account in this applicaiton , and also in the catalog in the furture. 
-    def __unicode__(self):
-        #return self.user.user.username
-        return self.twitter_username

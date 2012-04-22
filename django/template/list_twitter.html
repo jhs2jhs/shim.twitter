@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+{% block content %}
+<a href='/oauth/request/'>Add a new twitter account </a>
+<table border='1'>
+  <tr>
+    <th>Twitter Screen Name </th>
+    <th>Twitter User ID </th>
+    <th>Authenticated time</th>
+    <th>Owner in Dataware</th>
+  </tr>
+{% for profile in profiles %}
+  <tr>
+    <td> {{ profile.oauth_screen_name }} </td>
+    <td> <a href='/shim/{{ profile.oauth_user_id }}' >{{ profile.oauth_user_id }} </a></td>
+    <td> {{ profile.modify_time }} </td>
+    <td> {{ profile.user.username }} </td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

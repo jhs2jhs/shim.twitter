@@ -27,8 +27,8 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
 
+    url(r'^oauth/request/?$', 't_conn.views.twitter_oauth_request'),
+    url(r'^oauth/authenticated/?$', 't_conn.views.twitter_oauth_authenticated'),
 
-    url(r'^login/?$', 't_conn.views.login_user'),
-    url(r'^logout/?$', 't_conn.views.twitter_logout'),
-    url(r'^login/authenticated/?$', 't_conn.views.twitter_authenticated'),
+    url(r'^shim/(?P<t_user_id>\d+)/', 't_conn.views.user_timeline'),
 )
