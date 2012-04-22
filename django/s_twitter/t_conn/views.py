@@ -116,6 +116,6 @@ def get_oauth_client(profile):
 def user_timeline(request, t_user_id):
     profile = Profile.objects.get(oauth_user_id=t_user_id)
     client = get_oauth_client(profile)
-    url_user_timeline = 'http://api.twitter.com/1/statuses/user_timeline.json'
+    url_user_timeline = 'https://api.twitter.com/1/statuses/user_timeline.json?count=200'
     resp, content = client.request(url_user_timeline, 'GET')
     return HttpResponse(content)
