@@ -30,5 +30,6 @@ urlpatterns = patterns('',
     url(r'^oauth/request/?$', 't_conn.views.twitter_oauth_request'),
     url(r'^oauth/authenticated/?$', 't_conn.views.twitter_oauth_authenticated'),
 
+    # other twitter api should be trieve here
     url(r'^shim/(?P<t_user_id>\d+)/', 't_conn.views.user_timeline'),
 )

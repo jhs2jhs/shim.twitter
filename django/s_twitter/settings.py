@@ -165,6 +165,7 @@ sys.path.append('../../python-oauth2')
 TWITTER_CONSUMER_TOKEN = 'xoxygrgP3ocua3xnsHHPyA'
 TWITTER_CONSUMER_SECRET = 'pHZeJqvBodFVUzlfi24l0ujf22ksdjxiqVmKyT5H7ls'
 
+# may need to move it into a seperate class or file 
 TWITTER_REQUEST_TOKEN_URL = 'https://api.twitter.com/oauth/request_token'
 TWITTER_ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token'
 TWITTER_AUTHORIZE_URL = 'http://api.twitter.com/oauth/authorize'
