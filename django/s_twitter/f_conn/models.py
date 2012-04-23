@@ -18,6 +18,7 @@ class FOAuth(models.Model):
     access_secret = models.CharField(max_length=200, null=True)
     add_time = models.DateTimeField(auto_now_add=True)
     save_time = models.DateTimeField(auto_now=True)
+    expires = models.IntegerField(null=True) # may not use in this demo stage
     def __unicode__(self):
         return self.oauth_screen_name+' : '+unicode(self.save_time)
     
