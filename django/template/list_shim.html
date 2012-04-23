@@ -1,0 +1,45 @@
+{% extends './base.html' %}
+{% block content %}
+<br><br>
+<div id='twitter'>
+<a href='/oauth/request/'>Add a new twitter account </a>
+<table border='1'>
+  <tr>
+    <th>Twitter Screen Name </th>
+    <th>Twitter User ID </th>
+    <th>Authenticated time</th>
+    <th>Owner in Dataware</th>
+  </tr>
+{% for profile in profiles %}
+  <tr>
+    <td> {{ profile.oauth_screen_name }} </td>
+    <td> <a href='/shim/{{ profile.oauth_user_id }}' >{{ profile.oauth_user_id }} </a></td>
+    <td> {{ profile.modify_time }} </td>
+    <td> {{ profile.user.username }} </td>
+  </tr>
+{% endfor %}
+</table>
+</div>
+
+<br><br>
+<div id='facebook'>
+<a href='/oauth/facebook/init'>Add a new facebook account </a>
+<table border='1'>
+  <tr>
+    <th>Facebook Screen Name </th>
+    <th>Facebook User ID </th>
+    <th>Authenticated time</th>
+    <th>Owner in Dataware</th>
+  </tr>
+{% for oauth in oauths_facebook %}
+  <tr>
+    <td> {{ oauth.oauth_screen_name }} </td>
+    <td> <a href='/shim/facebook/{{ oauth.oauth_user_id }}' >{{ oauth.oauth_user_id }} </a></td>
+    <td> {{ oauth.save_time }} </td>
+    <td> {{ oauth.user.username }} </td>
+  </tr>
+{% endfor %}
+</table>
+</div>
+
+{% endblock %}

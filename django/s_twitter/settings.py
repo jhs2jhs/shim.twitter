@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     't_conn',
+    'f_conn',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -170,3 +171,7 @@ TWITTER_REQUEST_TOKEN_URL = 'https://api.twitter.com/oauth/request_token'
 TWITTER_ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token'
 TWITTER_AUTHORIZE_URL = 'http://api.twitter.com/oauth/authorize'
 TWITTER_AUTHENTICATE_URL = 'http://api.twitter.com/oauth/authenticate'
+
+# settings for facebook
+FACEBOOK_CONSUMER_TOKEN = '262213627207206'
+FACEBOOK_CONSUMER_SECRET = 'fa6a75251af3df395ccbb914610e2fe2'

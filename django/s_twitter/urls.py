@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from s_twitter import t_conn
+from s_twitter import t_conn, f_conn
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 't_conn.views.twitter_list'),
+    url(r'^$', 's_twitter.views.list_shims'),
 
     #url(r'^t_conn/hello', 'hello', include('s_twitter.t_conn.views')),
     url(r'^t_conn/hello', 't_conn.test.hello'),
@@ -32,4 +32,10 @@ urlpatterns = patterns('',
 
     # other twitter api should be trieve here
     url(r'^shim/(?P<t_user_id>\d+)/', 't_conn.views.user_timeline'),
+
+    # facebook session
+    url(r'^oauth/facebook/init/?$', 'f_conn.views.facebook_oauth_init'),
+    url(r'^oauth/facebook/request/?$', 'f_conn.views.facebook_oauth_request'),
+    url(r'^oauth/facebook/authenticated/?$', 'f_conn.views.facebook_oauth_authenticated'),
+    url('^shim/facebook/(?P<f_user_id>\d+)/', 'f_conn.views.user_photo_tagged'),
 )
