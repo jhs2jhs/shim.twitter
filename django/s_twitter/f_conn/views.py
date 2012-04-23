@@ -21,16 +21,14 @@ def get_consumer():
     return consumer_objs[0]
 
 FACEBOOK_OAUTH_URL = 'https://www.facebook.com/dialog/oauth'
-FACEBOOK_REDIRECT_URL_INIT = 'http://localhost:8080/oauth/facebook/init'
-FACEBOOK_REDIRECT_URL_REQUEST = 'http://localhost:8080/oauth/facebook/request'
-FACEBOOK_REDIRECT_URL_AUTHENTICATED = 'http://localhost:8080/oauth/facebook/authenticated'
+FACEBOOK_REDIRECT_URL_REQUEST = 'http://localhost:8080/oauth/facebook/authenticated'
 FACEBOOK_ACCESS_TOKEN_URL = 'https://graph.facebook.com/oauth/access_token'
 FACEBOOK_OAUTH_SCOPE = 'user_photo_video_tags,friends_photo_video_tags'
 
 client = httplib2.Http()
 
 @login_required
-def facebook_oauth_init(request):
+def facebook_oauth_request(request):
     # step 0: have the state param ready, it is stored in session as refered later by facebook redirect
     user = request.user
     state = request.session['facebook_oauth_state_user_in_django'] = user.id
@@ -49,7 +47,7 @@ def facebook_oauth_init(request):
     return HttpResponseRedirect(url)
 
 
-def facebook_oauth_request(request):
+def facebook_oauth_authenticated(request):
     # step 3: the user is redirected back to app
     # check if user decliend
     if 'error_reason' in request.REQUEST:
@@ -108,25 +106,6 @@ def facebook_oauth_request(request):
 
     return HttpResponse(content)
 
-# TODO need to delete this method
-def facebook_oauth_authenticated(request):
-    # step 3: the user is redirected back to app
-    # check if user decliend
-    if 'error_reason' in request.REQUEST:
-        error_reason = request.REQUEST.get('error_reason')
-        error = request.REQUEST.get('error')
-        error_description = request.REQUEST.get('error_description')
-        return HttpResponse('%s <br>%s <br>%s <br>'%(error_reason, error, error_description))
-    # is user accept
-    state = request.REQUEST.get('state')
-    code = request.REQUEST.get('code')
-    
-    # step 4: exchange the code for a user access token
-    url_params = {
-        'client_id': settings.FACEBOOK_CONSUMER_TOKEN,
-        'redirect_uri': state
-        }
-    return HttpResponse('hello')
 
 @login_required
 def user_photo_tagged(request, f_user_id):
