@@ -37,5 +37,6 @@ urlpatterns = patterns('',
     #url(r'^oauth/facebook/init/?$', 'f_conn.views.facebook_oauth_init'),
     url(r'^oauth/facebook/request/?$', 'f_conn.views.facebook_oauth_request'),
     url(r'^oauth/facebook/authenticated/?$', 'f_conn.views.facebook_oauth_authenticated'),
+    # example to get user tagged photo
     url('^shim/facebook/(?P<f_user_id>\d+)/', 'f_conn.views.user_photo_tagged'),
 )

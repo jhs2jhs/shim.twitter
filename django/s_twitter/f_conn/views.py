@@ -20,17 +20,20 @@ def get_consumer():
     #consumer_oauth = oauth.
     return consumer_objs[0]
 
+# these may need to move into setting pages
 FACEBOOK_OAUTH_URL = 'https://www.facebook.com/dialog/oauth'
 FACEBOOK_REDIRECT_URL_REQUEST = 'http://localhost:8080/oauth/facebook/authenticated'
 FACEBOOK_ACCESS_TOKEN_URL = 'https://graph.facebook.com/oauth/access_token'
 FACEBOOK_OAUTH_SCOPE = 'user_photo_video_tags,friends_photo_video_tags'
 
+# http proxy may set up here
 client = httplib2.Http()
 
 @login_required
 def facebook_oauth_request(request):
     # step 0: have the state param ready, it is stored in session as refered later by facebook redirect
     user = request.user
+    # TODO: need to check whether session data should be moved or not, in later stage, it is same in twitter part
     state = request.session['facebook_oauth_state_user_in_django'] = user.id
 
     # step 1: redirect the user to the oauth dialog
@@ -101,12 +104,14 @@ def facebook_oauth_authenticated(request):
     foauth = FOAuth.objects.get_or_create(user=user, consumer=consumer_obj, oauth_user_id=f_user_id, oauth_screen_name=f_screen_name)
     foauth = foauth[0]
     foauth.access_token = access_token
+    foauth.expire = expire_token # TODO: need to check whether a access token is expires or not, before use it. 
     foauth.save()
     #TODO: facebook oauth expired variable does not set here. 
 
     return HttpResponse(content)
 
 
+#example to use facebook api
 @login_required
 def user_photo_tagged(request, f_user_id):
     foauth = FOAuth.objects.get(oauth_user_id=f_user_id)
