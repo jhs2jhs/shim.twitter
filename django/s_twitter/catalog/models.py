@@ -13,10 +13,13 @@ class CResource(models.Model):
     def __unicode__(self):
         return self.name
 
-class CRAccess(models.model):
+class CRAccess(models.Model):
     resource = models.ForeignKey(CResource)
     token = models.CharField(max_length=200, null=True)
-
+    add_time = models.DateTimeField(auto_now_add=True)
+    save_time = models.DateTimeField(auto_now=True)
+    def __unicode__(self):
+        return self.resource.name+"**"+self.token
 
 
 # Create your models here.

@@ -44,4 +44,7 @@ urlpatterns = patterns('',
     url(r'^catalog/?$', 'catalog.views.hello'),
     url(r'^catalog/resource/register/request?$', 'catalog.views.resource_register_request'),
     #url(r'^catalog/resource/register/callback?$', 'catalog.views.resource_register_callback'),
+    url(r'^catalog/resource/access/request/(?P<resource_id>\d+)$', 'catalog.views.resource_access_request'),
+    # TODO: jog's caltalog would add install_complete in the end
+    url(r'^catalog/resource/register/callback/install_complete$', 'catalog.views.resource_access_request_callback'),
 )

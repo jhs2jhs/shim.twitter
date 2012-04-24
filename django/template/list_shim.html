@@ -13,11 +13,15 @@
   </tr>
 {% for resource in resources %}
   <tr>
-    <td> {{ resource.name }} </td>
-    <td> <a href='/catalog/{{ resource.registration_id }}' >{{ resource.registration_id }} </a></td>
-    <td> {{ resource.save_time }} </td>
-    <td> {{ resource.user.username }} </td>
-    <td> {{ resource.access_token }} </td>
+    <td> {{ resource.r.name }} </td>
+    <td> <a href='/catalog/resource/access/request/{{ resource.r.id }}' >{{ resource.r.registration_id }} </a></td>
+    <td> {{ resource.r.save_time }} </td>
+    <td> {{ resource.r.user.username }} </td>
+    <td> 
+      {% for r_aa in resource.r_a %}
+      <a href='/catalog/resource/access/test/{{ r_aa.token }}'>{{ r_aa.token }} </a>, 
+      {% endfor %} 
+    </td>
   </tr>
 {% endfor %}
 </table>
