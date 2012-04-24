@@ -82,6 +82,47 @@ def resource_access_request_callback(request):
     access_token = CRAccess.objects.get_or_create(resource=resource, token=code)
     print access_token
     return HttpResponseRedirect('/')
+
+
+# TODO: to test this function, please run: python catalog_resource_access_test.py in the same directory. 
+from f_conn.models import *
+from t_conn.models import *
+#from f_conn.views import user_photo_tagged
+from t_conn.views import get_oauth_client
+def resource_access_test(request):
+    access_token = request.REQUEST.get('access_token')
+    #access_token = 'M/0QCguqCX/G4qRTQyyAjZyT8nCTCTTwUFEm27AhIIg='
+    output = {}
+    catalog_access = CRAccess.objects.get(token=access_token)
+    user = catalog_access.resource.user
+    # facebook
+    foauths = FOAuth.objects.filter(user=user)
+    print foauths
+    output_f = {}
+    for foauth in foauths:
+        f_access_token = foauth.access_token
+        facebook_me_photos_url = 'https://graph.facebook.com/me/photos'
+        params = {'access_token':f_access_token}
+        url = '%s?%s'%(facebook_me_photos_url, urllib.urlencode(params))
+        resp, content = http.request(url, 'GET')
+        #if resp['status'] == '200':
+        output_f[foauth.oauth_screen_name] = content
+        print content
+    print "== finish facebook"
+    # twitter
+    profiles = Profile.objects.filter(user=user)
+    print profiles
+    output_t = {}
+    for profile in profiles:
+        client = get_oauth_client(profile)
+        url_user_timeline = 'https://api.twitter.com/1/statuses/user_timeline.json?count=200'
+        resp, content = client.request(url_user_time, 'GET')
+        #if resp['status'] == '200':
+        output_t[profile.oauth_screen_name] = content
+    print "== finish twitter"
+    output = {'twitter':output_t, 'facebook':output_f}
+    output = json.dumps(output)
+    return HttpResponse(output)
     
     
 
