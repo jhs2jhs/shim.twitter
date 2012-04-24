@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     't_conn',
     'f_conn',
+    'catalog',
 )
 
 # A sample logging configuration. The only tangible logging
