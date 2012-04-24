@@ -1,6 +1,29 @@
 {% extends './base.html' %}
 {% block content %}
 <br><br>
+<div id='resource'>
+<a href='/catalog/resource/register/request'>register resource on catalog </a>
+<table border='1'>
+  <tr>
+    <th> resource_name </th>
+    <th> resource_id </th>
+    <th> registration_time</th>
+    <th>Owner in Dataware</th>
+    <th> access_token </th>
+  </tr>
+{% for resource in resources %}
+  <tr>
+    <td> {{ resource.name }} </td>
+    <td> <a href='/catalog/{{ resource.registration_id }}' >{{ resource.registration_id }} </a></td>
+    <td> {{ resource.save_time }} </td>
+    <td> {{ resource.user.username }} </td>
+    <td> {{ resource.access_token }} </td>
+  </tr>
+{% endfor %}
+</table>
+</div>
+
+<br><br>
 <div id='twitter'>
 <a href='/oauth/request/'>Add a new twitter account </a>
 <table border='1'>

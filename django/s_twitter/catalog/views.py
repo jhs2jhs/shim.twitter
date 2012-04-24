@@ -3,17 +3,24 @@ from django.shortcuts import HttpResponse
 import httplib2
 import urllib
 import urllib2
+import json
+from catalog.models import CResource
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 http = httplib2.Http()
 catalog_url = 'http://localhost:8080'
-catalog_redirect_url = 'http://localhost:8090/catalog/resource/request_callback'
+catalog_redirect_url = 'http://localhost:8090/catalog/resource/register/callback'
 
 def hello(request):
     return HttpResponse('hello')
 
-def resource_request(request):
+@login_required
+def resource_register_request(request):
+    # 1.1 resource registration request
+    resource_name = 'shim_%s'%(str(datetime.now()))
     params = {
-        'resource_name':'shim',
+        'resource_name':resource_name,
         'redirect_uri': catalog_redirect_url,
         }
     post_params = urllib.urlencode(params)
@@ -24,8 +31,22 @@ def resource_request(request):
     resp, content = http.request(url, 'POST', headers=header, body=urllib.urlencode(params))
     print content
     # implementation 2: urllib2, i get this by reading jog's code: https://github.com/jog/dataware.prefstore/blob/master/src/prefstore/InstallationModule.py
-    req = urllib2.Request(url, post_params)
-    response = urllib2.urlopen(req)
-    print response.read()
+    #req = urllib2.Request(url, post_params)
+    #response = urllib2.urlopen(req)
+    #print response.read()
+
+    # 1.2 registration success
+    result = json.loads(content)
+    if not result.has_key('success') :
+        raise Exception('1.1 resource registration is not succesful')
+    resource_id = result['resource_id']
+    print resource_id
+
+    # save accounts into database:
+    user = request.user
+    resource = CResource.objects.get_or_create(user=user, name=resource_name, registration_id=resource_id)
+    resource = resource[0]
+    print resource.add_time
+
     return HttpResponse('world')
 

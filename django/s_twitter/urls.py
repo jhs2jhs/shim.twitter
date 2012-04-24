@@ -42,6 +42,6 @@ urlpatterns = patterns('',
 
     #catalog session
     url(r'^catalog/?$', 'catalog.views.hello'),
-    url(r'^catalog/resource/request/?$', 'catalog.views.resource_request'),
-    url(r'^catalog/resource/request_callback/?$', 'catalog.views.resource_request_callback'),
+    url(r'^catalog/resource/register/request?$', 'catalog.views.resource_register_request'),
+    #url(r'^catalog/resource/register/callback?$', 'catalog.views.resource_register_callback'),
 )
