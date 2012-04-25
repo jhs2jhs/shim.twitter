@@ -10,9 +10,9 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 http = httplib2.Http()
-catalog_url = 'http://localhost:8080'
-catalog_redirect_url = 'http://localhost:8090/catalog/resource/register/callback'
-catalog_resource_access_request_redirect_url = 'http://localhost:8090/catalog/resource/access/callback'
+catalog_url = 'http://localhost:8090'
+catalog_redirect_url = 'http://localhost:8080/catalog/resource/register/callback'
+catalog_resource_access_request_redirect_url = 'http://localhost:8080/catalog/resource/access/callback'
 # TODO: check catalog_redirect_url should be same, in practice, it should be different, ask jog why implemented like this
 catalog_resource_access_request_redirect_url = catalog_redirect_url 
 

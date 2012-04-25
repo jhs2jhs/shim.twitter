@@ -19,7 +19,7 @@
     <td> {{ resource.r.user.username }} </td>
     <td> 
       {% for r_aa in resource.r_a %}
-      <a href='/catalog/resource/access/test/{{ r_aa.token }}'>{{ r_aa.token }} </a>, 
+      <a href='/catalog/resource/access/test?access_token={{ r_aa.token }}'>{{ r_aa.token }} </a>, 
       {% endfor %} 
     </td>
   </tr>
