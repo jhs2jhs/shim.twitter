@@ -35,6 +35,7 @@ start catalog:
   2. make sure the user can be found in AuthorizationModule.py in function 'resource_authorize()'. you may have to create a a user in mysql first, and manully add it.
   3. change the server port into 8090 in CatalogServer.py
   4. start by: python CatalogServer.py
+-----
 test catalog in shim:
   1. cd shim.django.s_twiter/catalog
   2. python catalog_resource_access_test.py
