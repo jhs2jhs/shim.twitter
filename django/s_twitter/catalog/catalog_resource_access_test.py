@@ -2,9 +2,14 @@ import httplib2
 import urllib
 import json
 
-access_token = 'M/0QCguqCX/G4qRTQyyAjZyT8nCTCTTwUFEm27AhIIg='
+print "** test catalog function **"
 
-resource_url = 'http://localhost:8090/catalog/resource/access/test'
+#access_token = 'M/0QCguqCX/G4qRTQyyAjZyT8nCTCTTwUFEm27AhIIg='
+
+resource_url = 'http://localhost:8080/catalog/resource/access/test'
+print '== resource address : '+resource_url
+access_token = raw_input('== give me your access_token : ').strip()
+
 params = {
     'access_token':access_token
     }
